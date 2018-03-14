@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:HighlightVideoOnline"
+              xmlns:converter="clr-namespace:HighlightVideoOnline.Converters"
+             xmlns:models="clr-namespace:HighlightVideoOnline.ViewModels"
+             xmlns:customControls="clr-namespace:HighlightVideoOnline.CustomRender"
+             x:Class="HighlightVideoOnline.Views.CommonView.MenuCategoryView">
+    <ContentPage.BindingContext>
+        <models:MenuCategoryViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:FontColorConverter x:Key="fontColorConverter"/>
+            <converter:ScaleMinConverter x:Key="scaleMinConverter"/>
+            <converter:ScaleXConverter x:Key="scaleXConverter"/>
+            <converter:FontSizeConverter x:Key="fontSizeConverter"/>
+            <converter:RectangleArrayConverter x:Key="rectangleArrayConverter"/>
+            <converter:ThicknessArrayConverter x:Key="thicknessArrayConverter"/>
+            <x:Array Type="{x:Type x:Double}" x:Key="marginItemCategory">
+                <x:Double>40</x:Double>
+                <x:Double>0</x:Double>
+                <x:Double>0</x:Double>
+                <x:Double>0</x:Double>
+            </x:Array>
+            <x:Array Type="{x:Type x:Double}" x:Key="marginCellCategory">
+                <x:Double>20</x:Double>
+                <x:Double>0</x:Double>
+                <x:Double>20</x:Double>
+                <x:Double>0</x:Double>
+            </x:Array>
+            <x:Array Type="{x:Type x:Double}" x:Key="marginImageArrow">
+                <x:Double>0</x:Double>
+                <x:Double>0</x:Double>
+                <x:Double>20</x:Double>
+                <x:Double>0</x:Double>
+            </x:Array>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout Spacing="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="{Binding font_color_background_normal,Source={x:Static local:App.color_util}}">
+            <ListView CachingStrategy="RecycleElement" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" SeparatorVisibility="None"
+                          ItemsSource="{Binding CategoryInfoFormatters}">
+                <ListView.Header>
+                    <StackLayout Spacing="0" Orientation="Vertical" BackgroundColor="{Binding font_color_bg_tab,Source={x:Static local:App.color_util}}">
+                        <StackLayout Spacing="0" HorizontalOptions="EndAndExpand" HeightRequest="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=97}"
+                                         WidthRequest="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=200}">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer x:Name="stackCancel" Command="{Binding CloseCategoryMenu}"/>
+                            </StackLayout.GestureRecognizers>
+                            <Frame CornerRadius="{Binding Converter={StaticResource scaleXConverter},ConverterParameter=15}" Padding="0" OutlineColor="Black" 
+                                   HeightRequest="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=60}" 
+                                   VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
+                                   WidthRequest="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=170}"
+                                   BackgroundColor="{Binding font_color_icon_selected,Source={x:Static local:App.color_util}}" >
+                                <Label x:Name="lblClose" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Text="Close" 
+                                   FontSize="{Binding font_size_category,Source={x:Static local:App.size_util}}" TextColor="White" FontAttributes="Bold"/>
+                            </Frame >
+                        </StackLayout>
+                        <BoxView BackgroundColor="{Binding font_color_icon_selected,Source={x:Static local:App.color_util}}" 
+                                     HeightRequest="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=3}"
+                                     WidthRequest="{Binding Converter={StaticResource scaleXConverter},ConverterParameter=720}"/>
+                    </StackLayout>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <customControls:FrameButton BackgroundColor="White" CornerRadius="{Binding Converter={StaticResource scaleXConverter},ConverterParameter=15}" Padding="0"
+                                   Margin="{Binding Converter={StaticResource thicknessArrayConverter},ConverterParameter={StaticResource marginCellCategory}}">
+                                <customControls:FrameButton.GestureRecognizers>
+                                    <TapGestureRecognizer x:Name="cellTap" CommandParameter="{Binding .}" Command="{Binding OnSelected}" /> <!--Tapped="buttonTap"-->
+                                </customControls:FrameButton.GestureRecognizers>
+                                <StackLayout Spacing="0" BackgroundColor="White" >
+                                    <StackLayout Spacing="0" VerticalOptions="CenterAndExpand" Orientation="Horizontal">
+                                        <Label Margin="{Binding Converter={StaticResource thicknessArrayConverter},ConverterParameter={StaticResource marginItemCategory}}" 
+                                               Text="{Binding Name}" VerticalOptions="CenterAndExpand" FontSize="{Binding font_size_title,Source={x:Static local:App.size_util}}"
+                                               TextColor="{Binding font_color_black,Source={x:Static local:App.color_util}}"/>
+                                        <customControls:ImageTintColor Source="ic_arrow_right_black_36dp.png" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand"
+                                                                       HeightRequest="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=54}"
+                                                                        WidthRequest="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=54}"
+                                                                       Margin="{Binding Converter={StaticResource thicknessArrayConverter},ConverterParameter={StaticResource marginImageArrow}}" />
+                                    </StackLayout>
+                                    <BoxView BackgroundColor="{Binding font_color_border_gid,Source={x:Static local:App.color_util}}" 
+                                     HeightRequest="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=5}"
+                                     WidthRequest="{Binding Converter={StaticResource scaleXConverter},ConverterParameter=720}"/>
+                                </StackLayout>
+                            </customControls:FrameButton>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

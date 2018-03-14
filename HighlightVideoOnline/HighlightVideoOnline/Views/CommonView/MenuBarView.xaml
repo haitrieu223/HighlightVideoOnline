@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+              xmlns:converter="clr-namespace:HighlightVideoOnline.Converters"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:customRender="clr-namespace:HighlightVideoOnline.CustomRender"
+               xmlns:local="clr-namespace:HighlightVideoOnline"       
+             x:Class="HighlightVideoOnline.Views.CommonView.MenuBarView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converter:FontColorConverter x:Key="fontColorConverter"/>
+            <converter:ScaleMinConverter x:Key="scaleMinConverter"/>
+            <converter:ScaleXConverter x:Key="scaleXConverter"/>
+            <converter:ScaleYConverter x:Key="scaleYConverter"/>
+            <converter:FontSizeConverter x:Key="fontSizeConverter"/>
+            <converter:ThicknessConverter x:Key="thicknessConverter"/>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid ColumnSpacing="{Binding Converter={StaticResource scaleXConverter},ConverterParameter=16}" Margin="{Binding MarginTop}"
+              RowSpacing="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=10}" VerticalOptions="FillAndExpand"
+              HorizontalOptions="FillAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{Binding Converter={StaticResource scaleXConverter},ConverterParameter=312}"/>
+                <ColumnDefinition Width="{Binding Converter={StaticResource scaleXConverter},ConverterParameter=312}"/>
+                <!--<ColumnDefinition Width="{Binding Converter={StaticResource scaleXConverter},ConverterParameter=206}"/>-->
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=60}"/>
+                <RowDefinition Height="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=60}"/>
+            </Grid.RowDefinitions>
+            <customRender:LabelCustomBorder x:Name="lblHome" Grid.Column="0" Grid.Row="0" TextLabel="{Binding TabInfos.Item1.Name}" ValueLabel="{Binding TabInfos.Item1.Id}" TextColorLabel="{Binding font_color_icon_default,Source={x:Static local:App.color_util}}" 
+                                            BorderColorLabel="{Binding font_color_border_gid,Source={x:Static local:App.color_util}}" BgColorLabel="{Binding font_color_bg_tab,Source={x:Static local:App.color_util}}"
+                                            FontSizeLabel="{Binding font_size_title,Source={x:Static local:App.size_util}}" />
+            <customRender:LabelCustomBorder Grid.Column="1" Grid.Row="0" TextLabel="Game" ValueLabel="{Binding TabInfos.Item2.Id}" TextColorLabel="{Binding font_color_icon_default,Source={x:Static local:App.color_util}}" 
+                                            BorderColorLabel="{Binding font_color_border_gid,Source={x:Static local:App.color_util}}" BgColorLabel="{Binding font_color_bg_tab,Source={x:Static local:App.color_util}}"
+                                            FontSizeLabel="{Binding font_size_title,Source={x:Static local:App.size_util}}" />
+
+            <customRender:LabelCustomBorder Grid.Column="0" Grid.Row="1" TextLabel="{Binding TabInfos.Item3.Name}" ValueLabel="{Binding TabInfos.Item3.Id}" TextColorLabel="{Binding font_color_icon_default,Source={x:Static local:App.color_util}}" 
+                                            BorderColorLabel="{Binding font_color_border_gid,Source={x:Static local:App.color_util}}" BgColorLabel="{Binding font_color_bg_tab,Source={x:Static local:App.color_util}}"
+                                            FontSizeLabel="{Binding font_size_title,Source={x:Static local:App.size_util}}" />
+            <customRender:LabelCustomBorder Grid.Column="1" Grid.Row="1" TextLabel="{Binding TabInfos.Item4.Name}" ValueLabel="{Binding TabInfos.Item4.Id}" TextColorLabel="{Binding font_color_icon_default,Source={x:Static local:App.color_util}}" 
+                                            BorderColorLabel="{Binding font_color_border_gid,Source={x:Static local:App.color_util}}" BgColorLabel="{Binding font_color_bg_tab,Source={x:Static local:App.color_util}}"
+                                            FontSizeLabel="{Binding font_size_title,Source={x:Static local:App.size_util}}"  />
+
+        </Grid>
+    </ContentView.Content>
+</ContentView>

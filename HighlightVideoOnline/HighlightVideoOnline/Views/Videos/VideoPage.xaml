@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:converter ="clr-namespace:HighlightVideoOnline.Converters"
+             xmlns:customControls="clr-namespace:HighlightVideoOnline.CustomRender.Videos"
+             x:Class="HighlightVideoOnline.Views.Videos.VideoPage" NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:FontColorConverter x:Key="fontColorConverter"/>
+            <converter:FontSizeConverter x:Key="fontSizeConverter"/>
+            <converter:ScaleMinConverter x:Key="scaleMinConverter"/>
+            <converter:ScaleXConverter x:Key="scaleXConverter"/>
+            <converter:ScaleYConverter x:Key="scaleYConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <customControls:VideoViewCustom x:Name="videoViewCustom" VideoSource="https://ia601503.us.archive.org/14/items/IMG1235Ipad/Soccer/PsgVsRealMadrid1-22018.mp4" 
+                                            />
+            <Grid x:Name="gridNavigation" IsVisible="False" ColumnSpacing="0" RowSpacing="0" BackgroundColor="Black" Opacity=".7">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition x:Name="colImgBack" Width="{Binding Converter={StaticResource scaleXConverter},ConverterParameter=80}"/>
+                    <ColumnDefinition x:Name="colTitle" Width="{Binding Converter={StaticResource scaleXConverter},ConverterParameter=640}"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Spacing="0" Grid.Column="0" Grid.Row="0">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="stackBackTap" Tapped="stackBackTap_Tapped"/>
+                    </StackLayout.GestureRecognizers>
+                    <Image x:Name="imgBack" Source="ic_back_white_36dp.png" VerticalOptions="CenterAndExpand" 
+                           HeightRequest="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=54}"
+                         WidthRequest="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=54}"  HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+                <Image x:Name="imgFullScreen" Source="ic_back_white_36dp.png" VerticalOptions="CenterAndExpand"  Grid.Column="1" Grid.Row="0"
+                           HeightRequest="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=54}"
+                         WidthRequest="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=54}"  HorizontalOptions="EndAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="imgFullScreenTap" Tapped="imgFullScreenTap_Tapped"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

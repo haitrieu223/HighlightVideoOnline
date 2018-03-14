@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:HighlightVideoOnline"
+             xmlns:converter="clr-namespace:HighlightVideoOnline.Converters"
+             xmlns:commonView="clr-namespace:HighlightVideoOnline.Views.CommonView"
+             xmlns:customRender="clr-namespace:HighlightVideoOnline.CustomRender"
+             x:Class="HighlightVideoOnline.CustomRender.LabelCustomBorder">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converter:ThicknessConverter x:Key="thicknessConverter"/>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <Frame x:Name="frameBorder" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" 
+                   Padding="{Binding Converter={StaticResource thicknessConverter},ConverterParameter=1}"
+               BackgroundColor="{Binding font_color_border_gid,Source={x:Static local:App.color_util}}">
+                <Frame x:Name="frameBg" Padding="0">
+                    <Label x:Name="lblBorder" VerticalOptions="Center" HorizontalOptions="Center"/>
+                </Frame>
+            </Frame>
+            <Frame x:Name="frameEffect" BackgroundColor="OrangeRed" Opacity=".5" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" IsVisible="False"/>
+        </AbsoluteLayout>
+        
+    </ContentView.Content>
+</ContentView>

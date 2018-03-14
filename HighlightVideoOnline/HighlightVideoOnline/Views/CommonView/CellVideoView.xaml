@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converter="clr-namespace:HighlightVideoOnline.Converters"
+             xmlns:local="clr-namespace:HighlightVideoOnline"
+             xmlns:ffloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="HighlightVideoOnline.Views.CommonView.CellVideoView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converter:FontColorConverter x:Key="fontColorConverter"/>
+            <converter:ScaleMinConverter x:Key="scaleMinConverter"/>
+            <converter:ScaleXConverter x:Key="scaleXConverter"/>
+            <converter:ScaleYConverter x:Key="scaleYConverter"/>
+            <converter:FontSizeConverter x:Key="fontSizeConverter"/>
+            <converter:ThicknessConverter x:Key="thicknessConverter"/>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid ColumnSpacing="{Binding Converter={StaticResource scaleXConverter},ConverterParameter=20}" BackgroundColor="White"
+              RowSpacing="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=6}" 
+              VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{Binding Converter={StaticResource scaleXConverter},ConverterParameter=230}"/>
+                <ColumnDefinition Width="{Binding Converter={StaticResource scaleXConverter},ConverterParameter=410}"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=10}"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=10}"/>
+            </Grid.RowDefinitions>
+            <ffloading:CachedImage CacheDuration="1000" LoadingDelay="1000" LoadingPriority="Normal" HeightRequest="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=130}" 
+                                   WidthRequest="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=230}" 
+                                   Source="{Binding UrlThumbnail}" Grid.Column="0" Grid.Row="1" HorizontalOptions="Start" VerticalOptions="Center"/>
+            <StackLayout Spacing="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=6}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.Column="1" Grid.Row="1">
+                <Label Text="{Binding Name}" TextColor="{Binding font_color_black,Source={x:Static local:App.color_util}}" 
+                       FontSize="{Binding font_size_title,Source={x:Static local:App.size_util}}" FontAttributes="Bold"/>
+
+                <BoxView BackgroundColor="White" HeightRequest="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=4}" HorizontalOptions="FillAndExpand"/>
+                <Label Text="{Binding Views,StringFormat='{0:n0} Views'}" TextColor="{Binding font_color_black,Source={x:Static local:App.color_util}}" 
+                       FontSize="{Binding font_size_normal,Source={x:Static local:App.size_util}}">
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="iOS" Value="OpenSans-Regular" />
+                            <On Platform="Android" Value="OpenSans-Regular.ttf#OpenSans-Regular" />
+                        </OnPlatform>
+                    </Label.FontFamily>
+                </Label>
+                <Label Text="{Binding Tag}" TextColor="{Binding font_color_black,Source={x:Static local:App.color_util}}" FontSize="{Binding font_size_normal,Source={x:Static local:App.size_util}}">
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="iOS" Value="OpenSans-Regular" />
+                            <On Platform="Android" Value="OpenSans-Regular.ttf#OpenSans-Regular" />
+                        </OnPlatform>
+                    </Label.FontFamily>
+                </Label>
+            </StackLayout>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

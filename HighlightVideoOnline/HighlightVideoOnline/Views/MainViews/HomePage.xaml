@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:commonView="clr-namespace:HighlightVideoOnline.Views.CommonView"
+             xmlns:customRender="clr-namespace:HighlightVideoOnline.CustomRender"
+             xmlns:converter="clr-namespace:HighlightVideoOnline.Converters"
+             xmlns:local="clr-namespace:HighlightVideoOnline"
+             xmlns:models="clr-namespace:HighlightVideoOnline.ViewModels"
+             x:Class="HighlightVideoOnline.Views.MainViews.HomePage">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converter:FontColorConverter x:Key="fontColorConverter"/>
+            <converter:ScaleMinConverter x:Key="scaleMinConverter"/>
+            <converter:ScaleXConverter x:Key="scaleXConverter"/>
+            <converter:ScaleYConverter x:Key="scaleYConverter"/>
+            <converter:FontSizeConverter x:Key="fontSizeConverter"/>
+            <converter:ThicknessArrayConverter x:Key="thicknessArrayConverter"/>
+            <converter:RectangleArrayConverter x:Key="rectangleArrayConverter"/>
+            <x:Array Type="{x:Type x:Double}" x:Key="paramFrame">
+                <x:Double>600</x:Double>
+                <x:Double>950</x:Double>
+                <x:Double>90</x:Double>
+                <x:Double>90</x:Double>
+            </x:Array>
+        </ResourceDictionary>
+        </ContentView.Resources>
+    <ContentView.Content>
+        <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <Grid ColumnSpacing="0" RowSpacing="0" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{Binding Converter={StaticResource scaleXConverter},ConverterParameter=40}"/>
+                    <ColumnDefinition Width="{Binding Converter={StaticResource scaleXConverter},ConverterParameter=640}"/>
+                    <ColumnDefinition Width="{Binding Converter={StaticResource scaleXConverter},ConverterParameter=40}"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=430}"/>
+                    <RowDefinition Height="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=100}"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=150}"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!--<commonView:MenuBarView Grid.Column="1" Grid.Row="0"/>-->
+                <commonView:SliderImageView Grid.Column="1" Grid.Row="0" ListItems="{Binding ListSliderImage}"/>
+                <StackLayout Spacing="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=10}" Grid.Column="1" Grid.Row="1" VerticalOptions="EndAndExpand">
+                    <Label Text="New videos" FontSize="{Binding font_size_category,Source={x:Static local:App.size_util}}" 
+                       TextColor="{Binding font_color_icon_selected,Source={x:Static local:App.color_util}}" FontAttributes="Bold"/>
+                    <BoxView BackgroundColor="{Binding font_color_border_gid,Source={x:Static local:App.color_util}}" 
+                         HeightRequest="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=1}" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+                <customRender:ListViewShowAll Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3"  ItemsSource="{Binding ListVideo}" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" />
+
+                <StackLayout Spacing="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=10}" Grid.Column="1" Grid.Row="3" VerticalOptions="EndAndExpand">
+                    <Label Text="Popular videos" FontSize="{Binding font_size_category,Source={x:Static local:App.size_util}}" 
+                       TextColor="{Binding font_color_icon_selected,Source={x:Static local:App.color_util}}" FontAttributes="Bold"/>
+                    <BoxView BackgroundColor="{Binding font_color_border_gid,Source={x:Static local:App.color_util}}" 
+                         HeightRequest="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=1}" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+                <customRender:ListViewShowAll Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="3"  ItemsSource="{Binding ListVideo}" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" />
+
+            </Grid>
+            <Frame x:Name="frameCategory" AbsoluteLayout.LayoutFlags="None" BackgroundColor="OrangeRed" Padding="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=14}"
+                   AbsoluteLayout.LayoutBounds="{Binding Converter={StaticResource rectangleArrayConverter},ConverterParameter={StaticResource paramFrame}}"
+                   CornerRadius="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=45}" HasShadow="True" OutlineColor="Gray">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="frameCategoryTap" Tapped="frameCategoryTap_Tapped"/>
+                </Frame.GestureRecognizers>
+                <customRender:ImageTintColor Source="ic_category_black_36dp.png" TintColor="White"
+                                             HeightRequest="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=48}"
+                                             WidthRequest="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=48}"/>
+            </Frame>
+        </AbsoluteLayout>
+    </ContentView.Content>
+</ContentView>

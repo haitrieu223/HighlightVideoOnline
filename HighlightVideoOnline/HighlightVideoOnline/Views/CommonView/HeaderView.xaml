@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converter="clr-namespace:HighlightVideoOnline.Converters"
+             xmlns:local ="clr-namespace:HighlightVideoOnline"
+              xmlns:customRender="clr-namespace:HighlightVideoOnline.CustomRender"
+             x:Class="HighlightVideoOnline.Views.CommonView.HeaderView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converter:FontColorConverter x:Key="fontColorConverter"/>
+            <converter:ScaleMinConverter x:Key="scaleMinConverter"/>
+            <converter:ScaleXConverter x:Key="scaleXConverter"/>
+            <converter:FontSizeConverter x:Key="fontSizeConverter"/>
+            <converter:ThicknessArrayConverter x:Key="thicknessArrayConverter"/>
+            <x:Array Type="{x:Type x:Double}" x:Key="marginImageSearch">
+                <x:Double>0</x:Double>
+                <x:Double>0</x:Double>
+                <x:Double>20</x:Double>
+                <x:Double>0</x:Double>
+            </x:Array>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid ColumnSpacing="0" RowSpacing="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" 
+              BackgroundColor="{Binding font_color_bg_tab,Source={x:Static local:App.color_util}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{Binding Converter={StaticResource scaleXConverter},ConverterParameter=40}"/>
+                <ColumnDefinition Width="{Binding Converter={StaticResource scaleXConverter},ConverterParameter=490}"/>
+                <ColumnDefinition Width="{Binding Converter={StaticResource scaleXConverter},ConverterParameter=150}"/>
+                <ColumnDefinition Width="{Binding Converter={StaticResource scaleXConverter},ConverterParameter=40}"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=96}"/>
+                <RowDefinition Height="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=3}"/>
+            </Grid.RowDefinitions>
+            <Image Source="logo.png" Grid.Column="1" Grid.Row="0" HeightRequest="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=97}"
+                   WidthRequest="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=243}"
+                   VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
+            <StackLayout Spacing="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.Column="2" Grid.Row="0" Orientation="Horizontal" >
+                <Frame CornerRadius="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=35}" 
+                       HeightRequest="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=70}"
+                       WidthRequest="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=70}"
+                       VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Padding="0"
+                       BackgroundColor="{Binding font_color_icon_selected,Source={x:Static local:App.color_util}}">
+                    <customRender:ImageTintColor Source="ic_search_black_36dp.png" WidthRequest="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=48}"
+                          VerticalOptions="Center" HorizontalOptions="CenterAndExpand" TintColor="{Binding font_color_white,Source={x:Static local:App.color_util}}"
+                       HeightRequest="{Binding Converter={StaticResource scaleMinConverter},ConverterParameter=48}"/>
+                </Frame>
+            </StackLayout>
+            <BoxView Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4" BackgroundColor="{Binding font_color_icon_selected,Source={x:Static local:App.color_util}}"
+                     VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

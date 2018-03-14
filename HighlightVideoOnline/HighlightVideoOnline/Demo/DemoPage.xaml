@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BaseView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converter="clr-namespace:HighlightVideoOnline.Converters"
+             xmlns:styles="clr-namespace:HighlightVideoOnline.Commons"
+             xmlns:local="clr-namespace:HighlightVideoOnline"
+             xmlns:views="clr-namespace:HighlightVideoOnline.Views"
+             x:TypeArguments="local:DemoPageViewModel"
+             xmlns:customControls="clr-namespace:HighlightVideoOnline.CustomRender"
+             x:Class="HighlightVideoOnline.DemoPage">
+    <!--<ContentPage.BindingContext>
+        <local:DemoPageViewModel/>
+    </ContentPage.BindingContext>-->
+    <views:BaseView.Resources>
+        <ResourceDictionary>
+            <converter:FontColorConverter x:Key="fontColorConverter"/>
+            <converter:ScaleMinConverter x:Key="scaleMinConverter"/>
+            <converter:ScaleXConverter x:Key="scaleXConverter"/>
+            <converter:ScaleYConverter x:Key="scaleYConverter"/>
+            <converter:FontSizeConverter x:Key="fontSizeConverter"/>
+            <ResourceDictionary.MergedDictionaries>
+                <styles:CustomResouces/>
+            </ResourceDictionary.MergedDictionaries>           
+        </ResourceDictionary>
+    </views:BaseView.Resources>
+    <views:BaseView.Content>
+        <StackLayout Orientation="Horizontal">
+            <WebView x:Name="wVideo" HeightRequest="250" WidthRequest="360"/>
+            <!--<customControls:FrameButton BackgroundColor="OrangeRed" Opacity="0.5" Clicked="Click" CornerRadius="30">
+                <Label Text="{Binding Video.Name}"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="CenterAndExpand" FontSize="{StaticResource fontlarge}" />
+            </customControls:FrameButton>
+            
+            <Label Text="{Binding Video.UrlThumbnail}"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" FontSize="{StaticResource fontlarge}" />
+            --><!--<Button x:Name="buttonDemo" Clicked="buttonDemo_Clicked" CommandParameter="{Binding Video}" Command="{Binding NavToDetailCommand}" Text="Chuyển trang"/>--><!--
+            <Button x:Name="buttonDemo" Clicked="buttonDemo_Clicked" Text="Chuyển trang"/>-->
+        </StackLayout>
+    </views:BaseView.Content>
+</views:BaseView>

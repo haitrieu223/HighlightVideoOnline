@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converter="clr-namespace:HighlightVideoOnline.Converters"
+             xmlns:styles="clr-namespace:HighlightVideoOnline.Commons"
+             xmlns:local="clr-namespace:HighlightVideoOnline"
+             x:Class="HighlightVideoOnline.DetailDemoPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:FontColorConverter x:Key="fontColorConverter"/>
+            <converter:ScaleMinConverter x:Key="scaleMinConverter"/>
+            <converter:ScaleXConverter x:Key="scaleXConverter"/>
+            <converter:ScaleYConverter x:Key="scaleYConverter"/>
+            <converter:FontSizeConverter x:Key="fontSizeConverter"/>
+            <ResourceDictionary.MergedDictionaries>
+                <styles:CustomResouces/>
+            </ResourceDictionary.MergedDictionaries>           
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="{Binding Video.Name}"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="CenterAndExpand" FontSize="{StaticResource fontlarge}" />
+            <Label Text="{Binding Video.UrlThumbnail}"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" FontSize="{StaticResource fontlarge}" />
+            <Button CommandParameter="{Binding Video}" Command="{Binding NavToDetailCommand}" Text="Chuyển trang"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

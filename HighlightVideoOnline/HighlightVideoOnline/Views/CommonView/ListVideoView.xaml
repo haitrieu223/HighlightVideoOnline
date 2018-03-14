@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:commonView="clr-namespace:HighlightVideoOnline.Views.CommonView"
+             xmlns:customRender="clr-namespace:HighlightVideoOnline.CustomRender"
+             xmlns:converter="clr-namespace:HighlightVideoOnline.Converters"
+             xmlns:local="clr-namespace:HighlightVideoOnline"
+             x:Class="HighlightVideoOnline.Views.CommonView.ListVideoView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converter:FontColorConverter x:Key="fontColorConverter"/>
+            <converter:ScaleMinConverter x:Key="scaleMinConverter"/>
+            <converter:ScaleXConverter x:Key="scaleXConverter"/>
+            <converter:ScaleYConverter x:Key="scaleYConverter"/>
+            <converter:FontSizeConverter x:Key="fontSizeConverter"/>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid ColumnSpacing="0" RowSpacing="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{Binding Converter={StaticResource scaleXConverter},ConverterParameter=40}"/>
+                <ColumnDefinition Width="{Binding Converter={StaticResource scaleXConverter},ConverterParameter=680}"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <customRender:ListViewCustom x:Name="lstView" HasUnevenRows="True" VerticalOptions="FillAndExpand" 
+                      HorizontalOptions="FillAndExpand" Grid.Column="1" Grid.Row="0" ItemsSource="{Binding ListVideo}" IsVisibleScroll="false">
+                <customRender:ListViewCustom.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <commonView:CellVideoView/>
+                        </ViewCell>
+                    </DataTemplate>
+                </customRender:ListViewCustom.ItemTemplate>
+            </customRender:ListViewCustom>
+        </Grid>
+    </ContentView.Content>
+</ContentView>
